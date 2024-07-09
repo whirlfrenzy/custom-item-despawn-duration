@@ -8,7 +8,8 @@
     "whirlfrenzy"
   ],
   "contact": {
-    "sources": "https://github.com/whirlfrenzy/configurable-item-despawn-duration"
+    "sources": "https://github.com/whirlfrenzy/configurable-item-despawn-duration",
+    "issues": "https://github.com/whirlfrenzy/configurable-item-despawn-duration/issues"
   },
   "license": "MIT",
   "icon": "assets/configurable-item-despawn-duration/icon.png",
