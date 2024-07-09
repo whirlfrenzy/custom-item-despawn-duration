@@ -37,6 +37,7 @@ public class HashMapEditorScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        this.renderBackgroundTexture(context);
         super.render(context, mouseX, mouseY, delta);
         context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, 10, -1);
 
@@ -49,6 +50,10 @@ public class HashMapEditorScreen extends Screen {
         context.drawText(this.textRenderer, Text.translatable("configurable-item-despawn-duration.config.mapEditorValueFieldLabel"), this.width / 2 + 5, 26, -1, true);
 
         context.drawText(this.client.textRenderer, "s", this.width / 2 + 42, 41, -1, true);
+
+        this.keyTextField.render(context, mouseX, mouseY, delta);
+        this.valueTextField.render(context, mouseX, mouseY, delta);
+        this.addEntryButton.render(context, mouseX, mouseY, delta);
     }
 
     @Override
@@ -63,7 +68,7 @@ public class HashMapEditorScreen extends Screen {
             }
 
             Identifier id = Identifier.tryParse(text);
-            if(id == null || Registries.ITEM.getEntry(Identifier.of(text)).isEmpty()) {
+            if(id == null || !Registries.ITEM.containsId(id)) {
                 this.keyTextField.setEditableColor(0xFFFF7777);
                 this.keyTextField.setTooltip(Tooltip.of(Text.translatable("configurable-item-despawn-duration.config.invalidItem").formatted(Formatting.RED)));
             } else if(ConfigurableItemDespawnDurationConfig.despawnDurations.containsKey(id.toString())){
@@ -120,7 +125,7 @@ public class HashMapEditorScreen extends Screen {
                 }
 
                 Identifier id = Identifier.tryParse(this.keyTextField.getText());
-                if(id == null || ConfigurableItemDespawnDurationConfig.despawnDurations.containsKey(id.toString()) || Registries.ITEM.getEntry(id).isEmpty()){
+                if(id == null || ConfigurableItemDespawnDurationConfig.despawnDurations.containsKey(id.toString()) || !Registries.ITEM.containsId(id)){
                     return;
                 }
 
@@ -142,7 +147,7 @@ public class HashMapEditorScreen extends Screen {
             this.close();
         }).dimensions(this.width / 2 - 75, this.height - 30,150, 20).build();
 
-        this.list = new HashMapList(this.client, this.width, this.height - 105, 65, 25);
+        this.list = new HashMapList(this.client, this.width, this.height - 105, 65, this.height - 40, 25);
 
         for(HashMap.Entry<String, Integer> entry : ConfigurableItemDespawnDurationConfig.despawnDurations.entrySet()){
             this.list.add(entry);
@@ -169,8 +174,8 @@ public class HashMapEditorScreen extends Screen {
     }
 
     public static class HashMapList extends ElementListWidget<ListEntry> {
-        public HashMapList(MinecraftClient minecraftClient, int width, int height, int y, int itemHeight) {
-            super(minecraftClient, width, height, y, itemHeight);
+        public HashMapList(MinecraftClient minecraftClient, int width, int height, int top, int bottom, int itemHeight) {
+            super(minecraftClient, width, height, top, bottom, itemHeight);
         }
 
         public void add(HashMap.Entry<String, Integer> entry){
@@ -216,7 +221,7 @@ public class HashMapEditorScreen extends Screen {
             this.valueTextField = new TextFieldWidget(this.client.textRenderer, this.screenWidth / 2 + 5, 0, 35, 20, Text.literal("Value"));
             this.valueTextField.setText(String.valueOf(this.entry.getValue()));
 
-            if(Registries.ITEM.getEntry(Identifier.of(this.entry.getKey())).isEmpty()) {
+            if(!Registries.ITEM.containsId(new Identifier(this.entry.getKey()))) {
                 this.valueTextField.setEditable(false);
                 this.valueTextField.setUneditableColor(0x444444);
                 this.valueTextField.active = false;
@@ -226,7 +231,7 @@ public class HashMapEditorScreen extends Screen {
                 this.itemName.setTextColor(0x444444);
                 this.itemName.setTooltip(Tooltip.of(Text.translatable("configurable-item-despawn-duration.config.itemMissing")));
             } else {
-                this.representingItem = new ItemStack(Registries.ITEM.get(Identifier.of(this.entry.getKey())));
+                this.representingItem = new ItemStack(Registries.ITEM.get(new Identifier(this.entry.getKey())));
 
                 this.itemName = new TextWidget(0, 0, this.screenWidth / 2 - 30, 25, Text.translatable(this.representingItem.getTranslationKey()), this.client.textRenderer);
                 this.itemName.alignRight();

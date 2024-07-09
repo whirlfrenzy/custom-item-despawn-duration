@@ -321,7 +321,7 @@ public abstract class MidnightConfig {
                 Objects.requireNonNull(client).setScreen(parent);
             }).dimensions(this.width / 2 + 4, this.height - 26, 150, 20).build());
 
-            this.list = new MidnightConfigListWidget(this.client, this.width, this.height - 57, 24, 25);
+            this.list = new MidnightConfigListWidget(this.client, this.width, this.height - 57, 32, this.height - 32, 25);
             this.addSelectableChild(this.list);
 
             fillList();
@@ -421,6 +421,7 @@ public abstract class MidnightConfig {
         }
         @Override
         public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+            this.renderBackgroundTexture(context);
             super.render(context,mouseX,mouseY,delta);
             this.list.render(context, mouseX, mouseY, delta);
 
@@ -432,21 +433,11 @@ public abstract class MidnightConfig {
 
     public static class MidnightConfigListWidget extends ElementListWidget<ButtonEntry> {
         boolean renderHeaderSeperator = true;
-        public MidnightConfigListWidget(MinecraftClient client, int width, int height, int y, int itemHeight) {
-            super(client, width, height, y, itemHeight);
+        public MidnightConfigListWidget(MinecraftClient client, int width, int height, int top, int bottom, int itemHeight) {
+            super(client, width, height, top, bottom, itemHeight);
         }
         @Override
-        public int getScrollbarX() { return this.width -7; }
-
-        @Override
-        protected void drawHeaderAndFooterSeparators(DrawContext context) {
-            if (renderHeaderSeperator) super.drawHeaderAndFooterSeparators(context);
-            else {
-                RenderSystem.enableBlend();
-                context.drawTexture(this.client.world == null ? Screen.FOOTER_SEPARATOR_TEXTURE : Screen.INWORLD_FOOTER_SEPARATOR_TEXTURE, this.getX(), this.getBottom(), 0.0F, 0.0F, this.getWidth(), 2, 32, 2);
-                RenderSystem.disableBlend();
-            }
-        }
+        public int getScrollbarPositionX() { return this.width -7; }
 
         public void addButton(List<ClickableWidget> buttons, Text text, EntryInfo info) {
             info.buttonEntry = new ButtonEntry(buttons, text, info);
