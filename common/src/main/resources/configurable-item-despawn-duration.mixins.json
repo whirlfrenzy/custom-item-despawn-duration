@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "whirlfrenzy.configurableitemdespawnduration.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+    "ItemEntityAccessor",
+    "ItemEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
