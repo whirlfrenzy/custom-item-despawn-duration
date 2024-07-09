@@ -1,7 +1,7 @@
-package whirlfrenzy.configurableitemdespawnduration.neoforge;
+package whirlfrenzy.configurableitemdespawnduration.forge;
 
-import net.neoforged.fml.loading.FMLEnvironment;
-import net.neoforged.fml.loading.FMLPaths;
+import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.nio.file.Path;
 

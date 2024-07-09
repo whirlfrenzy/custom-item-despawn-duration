@@ -14,6 +14,7 @@ import net.minecraft.util.Identifier;
 import whirlfrenzy.configurableitemdespawnduration.ConfigurableItemDespawnDuration;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -134,7 +135,13 @@ public class HashMapEditorScreen extends Screen {
                     return;
                 }
 
-                ConfigurableItemDespawnDurationConfig.despawnDurations.putFirst(id.toString(), seconds);
+                // Curse you Java 17 not having LinkedHashMap.putFirst()
+                // Also I have to make sure that the LinkedHashMap is the exact same one after putting in the new entry
+                LinkedHashMap<String, Integer> oldDespawnDurations = new LinkedHashMap<>(ConfigurableItemDespawnDurationConfig.despawnDurations);
+                ConfigurableItemDespawnDurationConfig.despawnDurations.clear();
+                ConfigurableItemDespawnDurationConfig.despawnDurations.put(id.toString(), seconds);
+                ConfigurableItemDespawnDurationConfig.despawnDurations.putAll(oldDespawnDurations);
+
                 this.list.addToTop(Map.entry(id.toString(), seconds));
 
                 this.keyTextField.setText("");

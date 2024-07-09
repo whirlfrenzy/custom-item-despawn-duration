@@ -174,7 +174,7 @@ public abstract class MidnightConfig {
                 info.value = isNumber? value : s;
             else if (inLimits) {
                 if (((List<String>) info.value).size() == info.index) ((List<String>) info.value).add("");
-                ((List<String>) info.value).set(info.index, Arrays.stream(info.tempValue.replace("[", "").replace("]", "").split(", ")).toList().getFirst());
+                ((List<String>) info.value).set(info.index, Arrays.stream(info.tempValue.replace("[", "").replace("]", "").split(", ")).toList().get(0));
             }
 
             if (info.field.getAnnotation(Entry.class).isColor()) {
@@ -456,7 +456,7 @@ public abstract class MidnightConfig {
         public static final Map<ClickableWidget, Text> buttonsWithText = new HashMap<>();
 
         public ButtonEntry(List<ClickableWidget> buttons, Text text, EntryInfo info) {
-            if (!buttons.isEmpty()) buttonsWithText.put(buttons.getFirst(),text);
+            if (!buttons.isEmpty()) buttonsWithText.put(buttons.get(0),text);
             this.buttons = buttons;
             this.text = text;
             this.info = info;

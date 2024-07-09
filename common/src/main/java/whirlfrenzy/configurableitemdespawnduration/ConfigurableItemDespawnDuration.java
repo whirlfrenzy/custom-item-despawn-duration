@@ -6,7 +6,7 @@ import whirlfrenzy.configurableitemdespawnduration.config.ConfigurableItemDespaw
 
 public final class ConfigurableItemDespawnDuration {
     public static final String MOD_ID = "configurable-item-despawn-duration";
-    public static final String NEOFORGE_MOD_ID = "configurable_item_despawn_duration";
+    public static final String FORGE_MOD_ID = "configurable_item_despawn_duration";
 
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
