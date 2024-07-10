@@ -1,4 +1,4 @@
-package whirlfrenzy.configurableitemdespawnduration.mixin;
+package whirlfrenzy.customitemdespawnduration.mixin;
 
 import net.minecraft.entity.ItemEntity;
 import org.spongepowered.asm.mixin.Mixin;

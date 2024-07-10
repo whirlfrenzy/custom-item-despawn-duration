@@ -1,4 +1,4 @@
-package whirlfrenzy.configurableitemdespawnduration.mixin;
+package whirlfrenzy.customitemdespawnduration.mixin;
 
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import whirlfrenzy.configurableitemdespawnduration.config.ConfigurableItemDespawnDurationConfig;
+import whirlfrenzy.customitemdespawnduration.config.CustomItemDespawnDurationConfig;
 
 @Mixin(ItemEntity.class)
 public class ItemEntityMixin {
@@ -27,8 +27,8 @@ public class ItemEntityMixin {
             return;
         }
 
-        if(ConfigurableItemDespawnDurationConfig.despawnDurations.containsKey(itemIdentifier.toString()) || ConfigurableItemDespawnDurationConfig.modifyDefaultItemDuration){
-            ((ItemEntityAccessor)(Object)this).setItemAge(6000 - ConfigurableItemDespawnDurationConfig.despawnDurations.getOrDefault(itemIdentifier.toString(), ConfigurableItemDespawnDurationConfig.defaultItemDuration) * 20);
+        if(CustomItemDespawnDurationConfig.despawnDurations.containsKey(itemIdentifier.toString()) || CustomItemDespawnDurationConfig.modifyDefaultItemDuration){
+            ((ItemEntityAccessor)(Object)this).setItemAge(6000 - CustomItemDespawnDurationConfig.despawnDurations.getOrDefault(itemIdentifier.toString(), CustomItemDespawnDurationConfig.defaultItemDuration) * 20);
         }
 
     }

@@ -1,4 +1,4 @@
-package whirlfrenzy.configurableitemdespawnduration.config;
+package whirlfrenzy.customitemdespawnduration.config;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -11,7 +11,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import whirlfrenzy.configurableitemdespawnduration.ConfigurableItemDespawnDuration;
+import whirlfrenzy.customitemdespawnduration.CustomItemDespawnDuration;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +31,7 @@ public class HashMapEditorScreen extends Screen {
     }
 
     public HashMapEditorScreen(Screen parent){
-        this(Text.translatable("configurable-item-despawn-duration.config.mapEditorScreenTitle"));
+        this(Text.translatable("custom-item-despawn-duration.config.mapEditorScreenTitle"));
         this.parent = parent;
     }
 
@@ -42,18 +42,18 @@ public class HashMapEditorScreen extends Screen {
 
         // "Remote" is basically just LAN
         if(this.client.isIntegratedServerRunning() && this.client.getServer().isRemote()){
-            context.drawCenteredTextWithShadow(this.textRenderer, Text.translatable("configurable-item-despawn-duration.config.lanWarning"), this.width / 2, this.height - 10, -1);
+            context.drawCenteredTextWithShadow(this.textRenderer, Text.translatable("custom-item-despawn-duration.config.lanWarning"), this.width / 2, this.height - 10, -1);
         }
 
-        context.drawText(this.textRenderer, Text.translatable("configurable-item-despawn-duration.config.mapEditorKeyFieldLabel"), this.width / 2 - 155, 26, -1, true);
-        context.drawText(this.textRenderer, Text.translatable("configurable-item-despawn-duration.config.mapEditorValueFieldLabel"), this.width / 2 + 5, 26, -1, true);
+        context.drawText(this.textRenderer, Text.translatable("custom-item-despawn-duration.config.mapEditorKeyFieldLabel"), this.width / 2 - 155, 26, -1, true);
+        context.drawText(this.textRenderer, Text.translatable("custom-item-despawn-duration.config.mapEditorValueFieldLabel"), this.width / 2 + 5, 26, -1, true);
 
         context.drawText(this.client.textRenderer, "s", this.width / 2 + 42, 41, -1, true);
     }
 
     @Override
     public void init(){
-        this.keyTextField = new TextFieldWidget(this.textRenderer, this.width / 2 - 155, 35, 150, 20, Text.translatable("configurable-item-despawn-duration.config.mapEditorKeyFieldLabel"));
+        this.keyTextField = new TextFieldWidget(this.textRenderer, this.width / 2 - 155, 35, 150, 20, Text.translatable("custom-item-despawn-duration.config.mapEditorKeyFieldLabel"));
         this.keyTextField.setTextPredicate(text -> {
             if(text.isEmpty()){
                 this.keyTextField.setEditableColor(-1);
@@ -65,10 +65,10 @@ public class HashMapEditorScreen extends Screen {
             Identifier id = Identifier.tryParse(text);
             if(id == null || !Registries.ITEM.containsId(id)) {
                 this.keyTextField.setEditableColor(0xFFFF7777);
-                this.keyTextField.setTooltip(Tooltip.of(Text.translatable("configurable-item-despawn-duration.config.invalidItem").formatted(Formatting.RED)));
-            } else if(ConfigurableItemDespawnDurationConfig.despawnDurations.containsKey(id.toString())){
+                this.keyTextField.setTooltip(Tooltip.of(Text.translatable("custom-item-despawn-duration.config.invalidItem").formatted(Formatting.RED)));
+            } else if(CustomItemDespawnDurationConfig.despawnDurations.containsKey(id.toString())){
                 this.keyTextField.setEditableColor(0xFFFF7777);
-                this.keyTextField.setTooltip(Tooltip.of(Text.translatable("configurable-item-despawn-duration.config.itemAlreadyPresent").formatted(Formatting.RED)));
+                this.keyTextField.setTooltip(Tooltip.of(Text.translatable("custom-item-despawn-duration.config.itemAlreadyPresent").formatted(Formatting.RED)));
             } else {
                 this.keyTextField.setEditableColor(-1);
                 this.keyTextField.setTooltip(null);
@@ -76,9 +76,9 @@ public class HashMapEditorScreen extends Screen {
 
             return true;
         });
-        this.keyTextField.setPlaceholder(Text.translatable("configurable-item-despawn-duration.config.mapEditorKeyFieldPlaceholder").formatted(Formatting.GRAY));
+        this.keyTextField.setPlaceholder(Text.translatable("custom-item-despawn-duration.config.mapEditorKeyFieldPlaceholder").formatted(Formatting.GRAY));
 
-        this.valueTextField = new TextFieldWidget(this.textRenderer, this.width / 2 + 5, 35, 35, 20, Text.translatable("configurable-item-despawn-duration.config.value"));
+        this.valueTextField = new TextFieldWidget(this.textRenderer, this.width / 2 + 5, 35, 35, 20, Text.translatable("custom-item-despawn-duration.config.value"));
         this.valueTextField.setMaxLength(4);
         this.valueTextField.setTextPredicate(text -> {
             if(text.isEmpty()){
@@ -93,17 +93,17 @@ public class HashMapEditorScreen extends Screen {
                 seconds = Integer.parseInt(text);
             } catch(NumberFormatException e){
                 this.valueTextField.setEditableColor(0xFFFF7777);
-                this.valueTextField.setTooltip(Tooltip.of(Text.translatable("configurable-item-despawn-duration.config.notANumber").formatted(Formatting.RED)));
+                this.valueTextField.setTooltip(Tooltip.of(Text.translatable("custom-item-despawn-duration.config.notANumber").formatted(Formatting.RED)));
 
                 return true;
             }
 
             if(seconds > 1800){
                 this.valueTextField.setEditableColor(0xFFFF7777);
-                this.valueTextField.setTooltip(Tooltip.of(Text.translatable("configurable-item-despawn-duration.config.maximumValue", 1800).formatted(Formatting.RED)));
+                this.valueTextField.setTooltip(Tooltip.of(Text.translatable("custom-item-despawn-duration.config.maximumValue", 1800).formatted(Formatting.RED)));
             } else if(seconds < 0){
                 this.valueTextField.setEditableColor(0xFFFF7777);
-                this.valueTextField.setTooltip(Tooltip.of(Text.translatable("configurable-item-despawn-duration.config.minimumValue", 0).formatted(Formatting.RED)));
+                this.valueTextField.setTooltip(Tooltip.of(Text.translatable("custom-item-despawn-duration.config.minimumValue", 0).formatted(Formatting.RED)));
             } else {
                 this.valueTextField.setEditableColor(-1);
                 this.valueTextField.setTooltip(null);
@@ -120,23 +120,23 @@ public class HashMapEditorScreen extends Screen {
                 }
 
                 Identifier id = Identifier.tryParse(this.keyTextField.getText());
-                if(id == null || ConfigurableItemDespawnDurationConfig.despawnDurations.containsKey(id.toString()) || !Registries.ITEM.containsId(id)){
+                if(id == null || CustomItemDespawnDurationConfig.despawnDurations.containsKey(id.toString()) || !Registries.ITEM.containsId(id)){
                     return;
                 }
 
                 int seconds = Integer.parseInt(this.valueTextField.getText());
-                if(seconds > ConfigurableItemDespawnDuration.THIRTY_MINUTES_IN_SECONDS || seconds < 0){
+                if(seconds > CustomItemDespawnDuration.THIRTY_MINUTES_IN_SECONDS || seconds < 0){
                     return;
                 }
 
-                ConfigurableItemDespawnDurationConfig.despawnDurations.putFirst(id.toString(), seconds);
+                CustomItemDespawnDurationConfig.despawnDurations.putFirst(id.toString(), seconds);
                 this.list.addToTop(Map.entry(id.toString(), seconds));
 
                 this.keyTextField.setText("");
                 this.valueTextField.setText("");
             } catch(NumberFormatException ignored){
             }
-        }).dimensions(this.width / 2 + 55, 35, 20, 20).tooltip(Tooltip.of(Text.translatable("configurable-item-despawn-duration.config.add"))).build();
+        }).dimensions(this.width / 2 + 55, 35, 20, 20).tooltip(Tooltip.of(Text.translatable("custom-item-despawn-duration.config.add"))).build();
 
         this.backButton = new ButtonWidget.Builder(Text.translatable("gui.done"), (widget) -> {
             this.close();
@@ -144,7 +144,7 @@ public class HashMapEditorScreen extends Screen {
 
         this.list = new HashMapList(this.client, this.width, this.height - 105, 65, 25);
 
-        for(HashMap.Entry<String, Integer> entry : ConfigurableItemDespawnDurationConfig.despawnDurations.entrySet()){
+        for(HashMap.Entry<String, Integer> entry : CustomItemDespawnDurationConfig.despawnDurations.entrySet()){
             this.list.add(entry);
         }
 
@@ -224,7 +224,7 @@ public class HashMapEditorScreen extends Screen {
                 this.itemName = new TextWidget(0, 0, this.screenWidth / 2 - 30, 25, Text.literal(this.entry.getKey()), this.client.textRenderer);
                 this.itemName.alignRight();
                 this.itemName.setTextColor(0x444444);
-                this.itemName.setTooltip(Tooltip.of(Text.translatable("configurable-item-despawn-duration.config.itemMissing")));
+                this.itemName.setTooltip(Tooltip.of(Text.translatable("custom-item-despawn-duration.config.itemMissing")));
             } else {
                 this.representingItem = new ItemStack(Registries.ITEM.get(Identifier.of(this.entry.getKey())));
 
@@ -238,22 +238,22 @@ public class HashMapEditorScreen extends Screen {
                         seconds = Integer.parseInt(text);
                     } catch(NumberFormatException e){
                         this.valueTextField.setEditableColor(0xFFFF7777);
-                        this.valueTextField.setTooltip(Tooltip.of(Text.translatable("configurable-item-despawn-duration.config.notANumber")));
+                        this.valueTextField.setTooltip(Tooltip.of(Text.translatable("custom-item-despawn-duration.config.notANumber")));
 
                         return true;
                     }
 
                     if(seconds > 1800){
                         this.valueTextField.setEditableColor(0xFFFF7777);
-                        this.valueTextField.setTooltip(Tooltip.of(Text.translatable("configurable-item-despawn-duration.config.maximumValue", 1800).formatted(Formatting.RED)));
+                        this.valueTextField.setTooltip(Tooltip.of(Text.translatable("custom-item-despawn-duration.config.maximumValue", 1800).formatted(Formatting.RED)));
                     } else if(seconds < 0){
                         this.valueTextField.setEditableColor(0xFFFF7777);
-                        this.valueTextField.setTooltip(Tooltip.of(Text.translatable("configurable-item-despawn-duration.config.minimumValue", 0).formatted(Formatting.RED)));
+                        this.valueTextField.setTooltip(Tooltip.of(Text.translatable("custom-item-despawn-duration.config.minimumValue", 0).formatted(Formatting.RED)));
                     } else {
                         this.valueTextField.setEditableColor(-1);
                         this.valueTextField.setTooltip(null);
 
-                        ConfigurableItemDespawnDurationConfig.despawnDurations.put(this.entry.getKey(), seconds);
+                        CustomItemDespawnDurationConfig.despawnDurations.put(this.entry.getKey(), seconds);
                     }
 
                     return true;
@@ -261,9 +261,9 @@ public class HashMapEditorScreen extends Screen {
             }
 
             this.removeButton = new ButtonWidget.Builder(Text.literal("-"), (buttonWidget) -> {
-                ConfigurableItemDespawnDurationConfig.despawnDurations.remove(this.entry.getKey());
+                CustomItemDespawnDurationConfig.despawnDurations.remove(this.entry.getKey());
                 this.parentList.remove(this);
-            }).dimensions(this.screenWidth / 2 + 55, 0, 20, 20).tooltip(Tooltip.of(Text.translatable("configurable-item-despawn-duration.config.remove"))).build();
+            }).dimensions(this.screenWidth / 2 + 55, 0, 20, 20).tooltip(Tooltip.of(Text.translatable("custom-item-despawn-duration.config.remove"))).build();
         }
 
         @Override

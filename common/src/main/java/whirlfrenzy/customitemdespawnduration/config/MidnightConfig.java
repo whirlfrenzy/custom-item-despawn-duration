@@ -1,4 +1,4 @@
-package whirlfrenzy.configurableitemdespawnduration.config;
+package whirlfrenzy.customitemdespawnduration.config;
 
 import com.google.common.collect.Lists;
 import com.google.gson.ExclusionStrategy;
@@ -25,9 +25,7 @@ import net.minecraft.text.OrderedText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
-import whirlfrenzy.configurableitemdespawnduration.ConfigurableItemDespawnDuration;
-import whirlfrenzy.configurableitemdespawnduration.PlatformSpecificHelper;
+import whirlfrenzy.customitemdespawnduration.PlatformSpecificHelper;
 
 import java.awt.Color;
 import java.lang.annotation.ElementType;
@@ -262,7 +260,7 @@ public abstract class MidnightConfig {
             for (EntryInfo info : entries) {
                 try {info.field.set(null, info.value);} catch (IllegalAccessException ignored) {}
                 if(Objects.equals(info.field.getName(), "defaultItemDuration")){
-                    info.disabled = !ConfigurableItemDespawnDurationConfig.modifyDefaultItemDuration;
+                    info.disabled = !CustomItemDespawnDurationConfig.modifyDefaultItemDuration;
                     for (ClickableWidget button : info.buttonEntry.buttons) {
                         if(button instanceof TextFieldWidget){
                             ((TextFieldWidget)button).setEditable(!info.disabled);
@@ -377,7 +375,7 @@ public abstract class MidnightConfig {
                         if (e.isSlider()) {
                             widget = new MidnightSliderWidget(width - 160, 0, 150, 20, Text.of(info.tempValue), (Double.parseDouble(info.tempValue) - e.min()) / (e.max() - e.min()), info);
                         } else if(e.isMap()){
-                            widget = new ButtonWidget.Builder(Text.translatable("configurable-item-despawn-duration.config.openMapEditor"), (buttonWidget) -> {
+                            widget = new ButtonWidget.Builder(Text.translatable("custom-item-despawn-duration.config.openMapEditor"), (buttonWidget) -> {
                                 this.client.setScreen(new HashMapEditorScreen(this));
                             }).dimensions(width - 160, 0, 150, 20).build();
                         } else {

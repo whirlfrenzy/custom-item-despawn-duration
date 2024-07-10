@@ -1,4 +1,4 @@
-package whirlfrenzy.configurableitemdespawnduration;
+package whirlfrenzy.customitemdespawnduration;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 

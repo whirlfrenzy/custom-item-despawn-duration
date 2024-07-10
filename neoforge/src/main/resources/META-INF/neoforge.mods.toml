@@ -1,12 +1,12 @@
 modLoader = "javafml"
 loaderVersion = "[4,)"
-issueTrackerURL = "https://github.com/whirlfrenzy/configurable-item-despawn-duration/issues"
+issueTrackerURL = "https://github.com/whirlfrenzy/custom-item-despawn-duration/issues"
 license = "MIT"
 
 [[mods]]
-modId = "configurable_item_despawn_duration"
+modId = "custom_item_despawn_duration"
 version = "${version}"
-displayName = "Configurable Item Despawn Duration"
+displayName = "Custom Item Despawn Duration"
 authors = "whirlfrenzy"
 description = '''
 Configure how long items will last before despawning
@@ -28,4 +28,4 @@ ordering = "NONE"
 side = "BOTH"
 
 [[mixins]]
-config = "configurable-item-despawn-duration.mixins.json"
+config = "custom-item-despawn-duration.mixins.json"

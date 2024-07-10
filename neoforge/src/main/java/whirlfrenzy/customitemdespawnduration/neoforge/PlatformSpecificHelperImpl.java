@@ -1,4 +1,4 @@
-package whirlfrenzy.configurableitemdespawnduration.neoforge;
+package whirlfrenzy.customitemdespawnduration.neoforge;
 
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.loading.FMLPaths;

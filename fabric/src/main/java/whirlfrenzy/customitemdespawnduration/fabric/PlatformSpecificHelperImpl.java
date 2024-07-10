@@ -1,4 +1,4 @@
-package whirlfrenzy.configurableitemdespawnduration.fabric;
+package whirlfrenzy.customitemdespawnduration.fabric;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
