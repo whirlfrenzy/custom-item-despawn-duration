@@ -63,7 +63,7 @@ public class HashMapEditorScreen extends Screen {
             }
 
             Identifier id = Identifier.tryParse(text);
-            if(id == null || Registries.ITEM.getEntry(Identifier.of(text)).isEmpty()) {
+            if(id == null || !Registries.ITEM.containsId(id)) {
                 this.keyTextField.setEditableColor(0xFFFF7777);
                 this.keyTextField.setTooltip(Tooltip.of(Text.translatable("configurable-item-despawn-duration.config.invalidItem").formatted(Formatting.RED)));
             } else if(ConfigurableItemDespawnDurationConfig.despawnDurations.containsKey(id.toString())){
@@ -120,7 +120,7 @@ public class HashMapEditorScreen extends Screen {
                 }
 
                 Identifier id = Identifier.tryParse(this.keyTextField.getText());
-                if(id == null || ConfigurableItemDespawnDurationConfig.despawnDurations.containsKey(id.toString()) || Registries.ITEM.getEntry(id).isEmpty()){
+                if(id == null || ConfigurableItemDespawnDurationConfig.despawnDurations.containsKey(id.toString()) || !Registries.ITEM.containsId(id)){
                     return;
                 }
 
@@ -216,7 +216,7 @@ public class HashMapEditorScreen extends Screen {
             this.valueTextField = new TextFieldWidget(this.client.textRenderer, this.screenWidth / 2 + 5, 0, 35, 20, Text.literal("Value"));
             this.valueTextField.setText(String.valueOf(this.entry.getValue()));
 
-            if(Registries.ITEM.getEntry(Identifier.of(this.entry.getKey())).isEmpty()) {
+            if(!Registries.ITEM.containsId(Identifier.of(this.entry.getKey()))) {
                 this.valueTextField.setEditable(false);
                 this.valueTextField.setUneditableColor(0x444444);
                 this.valueTextField.active = false;
