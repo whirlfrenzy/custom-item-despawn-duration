@@ -1,10 +1,10 @@
-package whirlfrenzy.configurableitemdespawnduration.fabric;
+package whirlfrenzy.customitemdespawnduration.fabric;
 
 import net.fabricmc.api.ModInitializer;
 
-import whirlfrenzy.configurableitemdespawnduration.ConfigurableItemDespawnDuration;
+import whirlfrenzy.customitemdespawnduration.CustomItemDespawnDuration;
 
-public final class ConfigurableItemDespawnDurationFabric implements ModInitializer {
+public final class CustomItemDespawnDurationFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         // This code runs as soon as Minecraft is in a mod-load-ready state.
@@ -12,6 +12,6 @@ public final class ConfigurableItemDespawnDurationFabric implements ModInitializ
         // Proceed with mild caution.
 
         // Run our common setup.
-        ConfigurableItemDespawnDuration.init();
+        CustomItemDespawnDuration.init();
     }
 }

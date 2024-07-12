@@ -1,4 +1,4 @@
-package whirlfrenzy.configurableitemdespawnduration.forge;
+package whirlfrenzy.customitemdespawnduration.forge;
 
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.loading.FMLPaths;

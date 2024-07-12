@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "id": "configurable-item-despawn-duration",
+  "id": "custom-item-despawn-duration",
   "version": "${version}",
-  "name": "Configurable Item Despawn Duration",
+  "name": "Custom Item Despawn Duration",
   "description": "Configure how long items will last before despawning",
   "authors": [
     "whirlfrenzy"
   ],
   "contact": {
-    "sources": "https://github.com/whirlfrenzy/configurable-item-despawn-duration",
-    "issues": "https://github.com/whirlfrenzy/configurable-item-despawn-duration/issues"
+    "sources": "https://github.com/whirlfrenzy/custom-item-despawn-duration",
+    "issues": "https://github.com/whirlfrenzy/custom-item-despawn-duration/issues"
   },
   "license": "MIT",
-  "icon": "assets/configurable-item-despawn-duration/icon.png",
+  "icon": "assets/custom-item-despawn-duration/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "whirlfrenzy.configurableitemdespawnduration.fabric.ConfigurableItemDespawnDurationFabric"
+      "whirlfrenzy.customitemdespawnduration.fabric.CustomItemDespawnDurationFabric"
     ],
     "modmenu": [
-      "whirlfrenzy.configurableitemdespawnduration.fabric.config.ModMenuApiImpl"
+      "whirlfrenzy.customitemdespawnduration.fabric.config.ModMenuApiImpl"
     ]
   },
   "mixins": [
-    "configurable-item-despawn-duration.mixins.json"
+    "custom-item-despawn-duration.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.15.11",

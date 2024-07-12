@@ -1,17 +1,17 @@
-package whirlfrenzy.configurableitemdespawnduration.config;
+package whirlfrenzy.customitemdespawnduration.config;
 
-import whirlfrenzy.configurableitemdespawnduration.ConfigurableItemDespawnDuration;
+import whirlfrenzy.customitemdespawnduration.CustomItemDespawnDuration;
 
 import java.util.LinkedHashMap;
 
-public class ConfigurableItemDespawnDurationConfig extends MidnightConfig {
+public class CustomItemDespawnDurationConfig extends MidnightConfig {
     @Comment(centered = true)
     public static String comment = "";
 
     @Entry
     public static boolean modifyDefaultItemDuration = false;
 
-    @Entry(min = 0, max = ConfigurableItemDespawnDuration.THIRTY_MINUTES_IN_SECONDS)
+    @Entry(min = 0, max = CustomItemDespawnDuration.THIRTY_MINUTES_IN_SECONDS)
     public static int defaultItemDuration = 300;
 
     @Entry(isMap = true)

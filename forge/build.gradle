@@ -4,7 +4,7 @@ plugins {
 
 loom {
     forge {
-        mixinConfig "configurable-item-despawn-duration.mixins.json"
+        mixinConfig "custom-item-despawn-duration.mixins.json"
     }
 }
 

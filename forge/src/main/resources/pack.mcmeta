@@ -1,6 +1,6 @@
 {
   "pack": {
-    "description": "Configurable Item Despawn Duration",
+    "description": "Custom Item Despawn Duration",
     "forge:server_data_pack_format": 15,
     "pack_format": 15
   }
