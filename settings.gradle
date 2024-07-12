@@ -7,7 +7,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'configurable-item-despawn-duration'
+rootProject.name = 'custom-item-despawn-duration'
 
 include 'common'
 include 'fabric'
