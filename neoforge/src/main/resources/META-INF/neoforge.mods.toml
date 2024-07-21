@@ -13,14 +13,14 @@ Configure how long items will last before despawning
 '''
 #logoFile = ""
 
-[[dependencies.custom-item-despawn-duration]]
+[[dependencies.custom_item_despawn_duration]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.0,)"
+versionRange = "[21.0.110-beta,)"
 ordering = "NONE"
-side = "SERVER"
+side = "BOTH"
 
-[[dependencies.custom-item-despawn-duration]]
+[[dependencies.custom_item_despawn_duration]]
 modId = "minecraft"
 type = "required"
 versionRange = "[1.21,)"
